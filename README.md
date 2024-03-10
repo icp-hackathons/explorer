@@ -3,6 +3,11 @@ The Highfeast Explorer
 Problem Statement:
 Many individuals lack specialized assistance when planning menus for events or estimating food quantities and costs.
 
+## Shots:
+
+![Explorer showcase](public/showcase.png)
+
+
 ## Short Description:
 
 Highfeast Explorer is a LLM powered food companion and catering assistant.
