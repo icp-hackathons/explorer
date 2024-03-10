@@ -1,32 +1,40 @@
-import ChatBubble from "@/components/chatBubble";
-import LoginButton from "@/components/signIn";
-import { useGlobalContext } from "@/contexts/authContext";
-import { listUserDocs } from "@/utils/api";
 import { LogoCrown } from "@/utils/logoCrown";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
-export default function Home() {
-  const [loading, setLoading] = useState(false);
-  const [responsePair, setResponsePair] = useState<any | undefined>(undefined);
+const isWindow = typeof window !== "undefined";
 
-  const { user } = useGlobalContext();
+function getWindowDimensions(): { width: number; height: number } {
+  if (isWindow) {
+    const { innerWidth: width, innerHeight: height } = window;
+    return { width, height };
+  }
+  return { width: 0, height: 0 };
+}
+
+export default function Home() {
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  );
 
   useEffect(() => {
-    // Load chat History from Juno when the component mounts
-    const loadResponsePair = async () => {
-      setLoading(true);
-      const responsePairs = await listUserDocs("undefined");
-      if (responsePairs && responsePairs.length > 0) {
-        console.log("response pair", responsePairs);
-        setResponsePair(responsePairs);
-      }
-      setLoading(false);
-    };
-    if (user) {
-      loadResponsePair();
+    if (isWindow) {
+      const handleResize = () => {
+        setWindowDimensions(getWindowDimensions());
+      };
+
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
     }
-  }, [user]);
+  }, []);
+
+  const cardWidth = 36,
+    centerCardWidth = 44,
+    stackThreshold = 1024,
+    peekWidth = 10;
+
+  const { width: screenWidth } = windowDimensions;
+  const isMobile = screenWidth <= stackThreshold;
 
   return (
     <>
@@ -38,21 +46,69 @@ export default function Home() {
       </Head>
       <main>
         <div>
-          {!responsePair && (
-            <div>
-              <LogoCrown />
-              <p>Your food companion for every occasion...</p>
-              {!user && (
-                <>
-                  <LoginButton />
-                </>
-              )}
-            </div>
-          )}
+          <div>
+            <LogoCrown />
+            <div className="flex justify-center items-center w-full max-w-4xl mx-auto relative">
+              <SideCard
+                cardWidth={cardWidth}
+                centerCardWidth={centerCardWidth}
+                peekWidth={peekWidth}
+                isMobile={isMobile}
+                position="left"
+                bgColor="bg-yellow-400"
+              />
 
-          {responsePair && <ChatBubble history={responsePair} />}
+              <div className="z-10">
+                <div className={`w-${centerCardWidth} h-44 bg-green-500`}></div>
+              </div>
+
+              <SideCard
+                cardWidth={cardWidth}
+                centerCardWidth={centerCardWidth}
+                peekWidth={peekWidth}
+                isMobile={isMobile}
+                position="right"
+                bgColor="bg-red-500"
+              />
+            </div>
+            <p>Your food companion for every occasion...</p>
+          </div>
         </div>
       </main>
     </>
   );
 }
+
+const SideCard = ({
+  cardWidth,
+  centerCardWidth,
+  peekWidth,
+  isMobile,
+  position,
+  bgColor,
+}: {
+  cardWidth: number;
+  centerCardWidth: number;
+  peekWidth: number;
+  isMobile: boolean;
+  position: "left" | "right";
+  bgColor: string;
+}) => {
+  const leftTranslation = isMobile
+    ? `translate-x-${centerCardWidth / 2 - peekWidth}`
+    : `-translate-x-${centerCardWidth / 2 + cardWidth / 2}`;
+
+  const rightTranslation = isMobile
+    ? `-translate-x-${centerCardWidth / 2 - peekWidth}`
+    : `translate-x-${centerCardWidth / 2 + cardWidth / 2}`;
+
+  const translation = position === "left" ? leftTranslation : rightTranslation;
+
+  return (
+    <div
+      className={`absolute ${
+        position === "left" ? "left-0" : "right-0"
+      } top-0 bottom-0 w-${cardWidth} ${bgColor} transform transition duration-500 ease-in-out ${translation}`}
+    ></div>
+  );
+};
