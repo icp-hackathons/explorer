@@ -16,6 +16,7 @@
     "@langchain/openai": "^0.0.18",
     "@langchain/pinecone": "^0.0.3",
     "@pinecone-database/pinecone": "^2.1.0",
+    "clsx": "^2.1.0",
     "csv-stringify": "^6.4.6",
     "js-cookie": "^3.0.5",
     "langchain": "^0.1.25",
@@ -26,7 +27,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-markdown": "^9.0.1",
-    "remark-gfm": "^4.0.0"
+    "remark-gfm": "^4.0.0",
+    "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
