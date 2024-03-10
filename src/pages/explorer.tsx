@@ -84,7 +84,7 @@ const explorer = () => {
                 </div>
                 <textarea
                   className="absolute inset-0 w-full overflow-y-hidden border-none focus:outline-none text-[#4C505F] h-[4.5rem] resize-none h-[initial]"
-                  placeholder="Enter an idea proposal..."
+                  placeholder="Ask me anything..."
                   onChange={(e) => setBodyText(e.target.value)}
                 />
               </div>
