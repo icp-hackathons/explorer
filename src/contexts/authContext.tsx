@@ -1,13 +1,7 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { User, authSubscribe, initJuno } from "@junobuild/core-peer";
 import cookies from "js-cookie";
 import { useRouter } from "next/router.js";
-import {
-  type Doc,
-  initJuno,
-  setDoc,
-  authSubscribe,
-  User,
-} from "@junobuild/core-peer";
+import { createContext, useContext, useEffect, useState } from "react";
 // import { User, authSubscribe } from '@junobuild/core';
 
 export interface AuthContext {
@@ -72,7 +66,6 @@ const GlobalProvider = ({ children }: any) => {
         setUserCookie(user);
         console.log(user);
         setUser(user);
-        router.push("/");
       } else {
         // setUserCookie(null)
         // router.push("/login")
