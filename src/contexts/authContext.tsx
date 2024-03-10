@@ -52,10 +52,15 @@ const GlobalProvider = ({ children }: any) => {
   const removeUserCookie = () => cookies.remove("auth");
 
   useEffect(() => {
-    (async () =>
-      await initJuno({
-        satelliteId: "k2y4c-mqaaa-aaaal-adyqq-cai",
-      }))();
+    (async () => {
+      try {
+        await initJuno({
+          satelliteId: "k2y4c-mqaaa-aaaal-adyqq-cai",
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    })();
   }, []);
 
   //Unscribe from Authlistner

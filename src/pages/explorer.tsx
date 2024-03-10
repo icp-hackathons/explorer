@@ -43,14 +43,14 @@ const explorer = () => {
   }, [user]);
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 w-full">
       <Nav />
 
       <div className="flex">
         <div className="flex-1 flex flex-col gap-4 items-center px-8 pb-60">
           {isEmpty(tempPairs) ? (
             <div className="flex flex-col gap-8 items-center">
-              <p className="max-w-prose text-balance text-center">
+              <p className="max-w-prose text-balance text-center font-bellota text-2xl font-bold text-[#194237]">
                 I can help you plan menus, list condiments, for your menus,
                 create meal plans and manage your budget
               </p>
@@ -64,7 +64,7 @@ const explorer = () => {
             tempPairs.map((pair: any, index: number) => {
               return (
                 <>
-                  <ChatBubble name="You" message={pair.human_message} />
+                  <ChatBubble name="You" message={pair.human_message} isUser />
                   {pair.ai_message ? (
                     <ChatBubble name="High feast" message={pair.ai_message} />
                   ) : (
@@ -105,7 +105,11 @@ const explorer = () => {
   );
 };
 
-const ChatBubble = (chat: { name: string; message: string; time?: string }) => {
+const ChatBubble = (chat: {
+  name: string;
+  message: string;
+  isUser?: boolean;
+}) => {
   return (
     <div className=" flex w-full gap-2 pr-6 max-w-[48.5rem]">
       <div className=" w-full max-w-[70px] h-[70px] overflow-hidden rounded-full relative">
@@ -121,7 +125,11 @@ const ChatBubble = (chat: { name: string; message: string; time?: string }) => {
           alt={`something`}
         />
       </div>
-      <CommentCard name={chat.name} message={chat.message} />
+      <CommentCard
+        name={chat.name}
+        message={chat.message}
+        isUser={chat.isUser}
+      />
     </div>
   );
 };
