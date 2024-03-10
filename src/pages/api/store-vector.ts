@@ -1,15 +1,14 @@
-import fs from "fs";
-import type { NextApiRequest, NextApiResponse } from "next";
-import { Document } from "langchain/document";
-import mammoth from "mammoth";
-import { promisify } from "util";
-import { Pinecone } from "@pinecone-database/pinecone";
 import { filePath } from "@/utils/consts";
-import { extractTableData, toHTML } from "@/utils/helpers";
-import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import { extractTableData } from "@/utils/helpers";
+import { Pinecone } from "@pinecone-database/pinecone";
 import { stringify } from "csv-stringify";
+import fs from "fs";
+import { Document } from "langchain/document";
+import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
-
+import mammoth from "mammoth";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { promisify } from "util";
 
 const readFileAsync = promisify(fs.readFile);
 

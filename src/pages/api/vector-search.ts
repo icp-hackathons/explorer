@@ -1,11 +1,11 @@
-import { Pinecone } from "@pinecone-database/pinecone";
-import { OpenAIEmbeddings } from "langchain/embeddings/openai";
-import { prompt, PineConeMetadata } from "../../utils/consts";
-import { NextApiRequest, NextApiResponse } from "next";
 import { measuringUnits } from "@/utils/helpers";
-import { OpenAI } from "langchain/llms/openai";
+import { AIMessage, HumanMessage } from "@langchain/core/messages";
+import { Pinecone } from "@pinecone-database/pinecone";
 import { Document } from "langchain/document";
-import { HumanMessage, AIMessage } from "@langchain/core/messages";
+import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import { OpenAI } from "langchain/llms/openai";
+import { NextApiRequest, NextApiResponse } from "next";
+import { PineConeMetadata, prompt } from "../../utils/consts";
 
 const pineconeApiKey = process.env.PINECONE_API_KEY;
 const openAIApiKey = process.env.OPENAI_API_KEY;

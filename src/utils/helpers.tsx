@@ -1,46 +1,43 @@
 import markdownIt from "markdown-it";
-import { MenuItem } from "./types";
-
-
 
 export const extractTableData = (htmlString: string) => {
-    const menuItems = [];
-    const rows = htmlString.match(/<tr>.*?<\/tr>/gs);
+  const menuItems = [];
+  const rows = htmlString.match(/<tr>.*?<\/tr>/gs);
 
-    if (rows) {
-        for (const row of rows) {
-            const columns = row.match(/<td[^>]*>.*?<\/td>/gs);
-            if (columns && columns.length >= 4) {
-                const item = columns[0].replace(/<\/?[^>]+(>|$)/g, ""); // Removing HTML tags
-                const quantity = columns[1].replace(/<\/?[^>]+(>|$)/g, "");
-                const unitPrice = columns[2].replace(/<\/?[^>]+(>|$)/g, "");
-                const totalPrice = columns[3].replace(/<\/?[^>]+(>|$)/g, "");
-                menuItems.push({ item, quantity, unitPrice, totalPrice });
-            }
-        }
+  if (rows) {
+    for (const row of rows) {
+      const columns = row.match(/<td[^>]*>.*?<\/td>/gs);
+      if (columns && columns.length >= 4) {
+        const item = columns[0].replace(/<\/?[^>]+(>|$)/g, ""); // Removing HTML tags
+        const quantity = columns[1].replace(/<\/?[^>]+(>|$)/g, "");
+        const unitPrice = columns[2].replace(/<\/?[^>]+(>|$)/g, "");
+        const totalPrice = columns[3].replace(/<\/?[^>]+(>|$)/g, "");
+        menuItems.push({ item, quantity, unitPrice, totalPrice });
+      }
     }
-    return menuItems.filter((menuItem) => menuItem.item !== "TOTAL");
+  }
+  return menuItems.filter((menuItem) => menuItem.item !== "TOTAL");
 };
 export function toHTML(markdownText: string) {
-    const md = new markdownIt();
-    return md.render(markdownText);
+  const md = new markdownIt();
+  return md.render(markdownText);
 }
 
 export const exportTable = (name: string) => {
-    const table = document.getElementById(name);
-    const blob = new Blob([table!.outerHTML], {
-        type: "application/msword",
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${name}.docx`;
-    a.click();
-    URL.revokeObjectURL(url);
+  const table = document.getElementById(name);
+  const blob = new Blob([table!.outerHTML], {
+    type: "application/msword",
+  });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${name}.docx`;
+  a.click();
+  URL.revokeObjectURL(url);
 };
 
-export const generateMemoryKey = (userID: string, sessionKey: string) => `${userID}-${sessionKey}`;
-
+export const generateMemoryKey = (userID: string, sessionKey: string) =>
+  `${userID}-${sessionKey}`;
 
 export const measuringUnits = `
 Condiment,Unit,Standard Size,Large Size,Small Size
@@ -67,4 +64,4 @@ Garlic,Painter,1 kg,150 g,80 g
 Onion,Bag,100 kg,170 g,125 g
 Chicken Maggi,Packet,400 g,,4 g
 Benny Flavor,Packet,714 g,,17 g
-`
+`;

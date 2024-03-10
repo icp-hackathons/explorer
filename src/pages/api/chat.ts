@@ -1,7 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { Pinecone } from "@pinecone-database/pinecone";
-import { HumanMessage, AIMessage } from "@langchain/core/messages";
 import { callVectorDBQAChain } from "@/utils/api";
+import { Pinecone } from "@pinecone-database/pinecone";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
   message: string;
@@ -25,9 +24,6 @@ export default async function handler(
   if (!messages || !Array.isArray(messages)) {
     return res.status(400).json({ message: "messages format error" });
   }
-
-
-
 
   const pineconeIndex = pinecone.index("highfeast1");
 
