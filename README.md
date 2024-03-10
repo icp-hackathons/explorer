@@ -47,7 +47,7 @@ Users can access these datasets to gain context-specific insights and chat with 
 ## Usage:
 
 1. Start the frontend development server: `npm run dev`
-2. Access the application in your browser: `http://localhost:3000`
+2. Access the application in your browser: `http://localhost:3000/explorer`
 3. Sign up and start a conversation
 
 ## Credits:
