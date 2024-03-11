@@ -67,7 +67,7 @@ export default function Home() {
                 <div className="z-10">
                   <div
                     className={cn(
-                      `min-w-${centerCardWidth}`,
+                      "min-w-" + centerCardWidth,
                       "min-h-96 bg-green-500"
                     )}
                   >
