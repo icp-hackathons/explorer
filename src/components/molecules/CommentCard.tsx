@@ -18,7 +18,9 @@ const CommentCard = (chat: {
       <p className=" text-xl font-outfit font-semibold text-[#484E62]">
         {chat.name}
       </p>
-      <Markdown remarkPlugins={[remarkGfm]}>{chat.message}</Markdown>
+      <Markdown className="prose" remarkPlugins={[remarkGfm]}>
+        {chat.message}
+      </Markdown>
       {chat.time && (
         <p className=" text-[#4C505F] text-sm italic text-end">{chat.time}</p>
       )}
