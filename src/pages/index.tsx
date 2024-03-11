@@ -66,10 +66,10 @@ export default function Home() {
               <Link href={"/explorer"}>
                 <div className="z-10">
                   <div
-                    className={cn(
-                      "w-" + centerCardWidth,
-                      "min-h-96 bg-green-500"
-                    )}
+                    className={"min-h-96 bg-green-500"}
+                    style={{
+                      minWidth: centerCardWidth / 4 + "rem",
+                    }}
                   >
                     {/* TODO: image goes here */}
                   </div>
