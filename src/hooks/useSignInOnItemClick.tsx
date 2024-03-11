@@ -1,4 +1,3 @@
-import { useGlobalContext } from "@/contexts/authContext";
 import {
   InternetIdentityProvider,
   User,
@@ -39,8 +38,6 @@ export const useSignInOnItemClick = () => {
     const isButtonClicked =
       event.target.tagName === "BUTTON" || event.target.closest("button");
 
-    console.log(isButtonClicked);
-
     if (isButtonClicked && loggedIn === false) {
       event.stopPropagation();
       _signIn();
@@ -52,7 +49,7 @@ export const useSignInOnItemClick = () => {
     return () => {
       document.removeEventListener("click", handleDocumentClick, true); // Cleanup
     };
-  }, []);
+  }, [loggedIn]);
 
   return { showModal, setShowModal };
 };
