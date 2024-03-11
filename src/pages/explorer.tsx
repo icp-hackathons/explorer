@@ -84,7 +84,7 @@ const explorer = () => {
                       <ChatBubble name="High feast" message={pair.ai_message} />
                     ) : (
                       // <div>loading</div>
-                      <ChatBubble name="High feast" message={null} />
+                      <ChatBubble name="High feast" message={undefined} />
                     )}
                   </div>
                 );

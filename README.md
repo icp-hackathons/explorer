@@ -1,7 +1,9 @@
-The Highfeast Explorer
+# The Highfeast Explorer
+
+`- HF Explorer is in active development and not fully ready for public testing. This README is a public guide for developers and contributors who would like to join or contribute to our team. Namaste! 🙇`
 
 Problem Statement:
-Many individuals lack specialized assistance when planning menus for events or estimating food quantities and costs.
+Many individuals lack specialized assistance when planning menus for events or estimating food quantities and costs. Especially the local food!
 
 ## Shots:
 
@@ -10,23 +12,23 @@ Many individuals lack specialized assistance when planning menus for events or e
 
 ## Short Description:
 
-Highfeast Explorer is a LLM powered food companion and catering assistant.
+Highfeast Explorer is an AI powered food companion and catering assistant.
 
 ## Vision:
 
-To provide users with an intuitive platform where they can easily plan menus, estimate costs, and receive cooking assistance, leveraging a decentralized internet for storage, and similarity checks from specialized datasets curated from over 23 years of traditional catering services.
+To provide users with an intuitive platform where they can easily plan menus, estimate costs, and receive cooking assistance, leveraging a decentralized internet for storage, and similarity checks from vectorized datasets curated from over 23 years of Highfeast's traditional catering services.
 
 ## Description and Outline:
 
-Highfeast Explorer is designed to cater to users' diverse food-related events, whether they are planning a wedding, organizing a community feeding program, or managing home cooking. Unlike generalized search engines or chat models, Highfeast Explorer offers specialized assistance with cultural menus.
+Highfeast Explorer is designed to cater to users' diverse food-related events, whether they are planning a wedding, organizing a community feeding program, or managing home cooking. 
 
-Users can access these datasets to gain context-specific insights and chat with the AI for personalized recommendations.
+We use vectorized food datasets to gain context-specific insights and offer personalized recommendations and responses to prompts.
 
 ## Features:
 
 - Specialized food companion and catering assistant
 - Intuitive platform for planning menus and estimating food costs
-- Access to specialized datasets from highfeast and other cookbook creators.
+- Access to specialized datasets from highfeast and cookbook creators.
 - Secure AI chat history and data storage with internet computer's Juno framework
 
 ## Technologies Used:
@@ -50,6 +52,11 @@ Users can access these datasets to gain context-specific insights and chat with 
 2. Access the application in your browser: `http://localhost:3000/explorer`
 3. Sign up and start a conversation
 
-## Credits:
+### Contributors:
 
-- [Highfeast Catering Services](https://www.instagram.com/highfeast_ng), for giving us mock data on African Jollof rice for this demo purpose
+- [Highfeast Catering Services](https://www.instagram.com/highfeast_ng): Moko datasets on African food menus 
+- [@dezy404](): Product lead
+- [@AcGodson](): Developer lead
+- [@KelvinPraises](): Frontend design
+- [@BlossomMd](): Brand and Assets Design
+
