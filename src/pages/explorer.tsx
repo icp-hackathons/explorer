@@ -7,9 +7,9 @@ import CommentCard from "@/components/molecules/CommentCard";
 import SamplePromptsCard from "@/components/molecules/SamplePromptsCard";
 import Nav from "@/components/organisms/Nav";
 import { useGlobalContext } from "@/contexts/authContext";
-import { listUserDocs } from "@/utils/api";
 import { useChatHook } from "@/hooks/useChat";
 import { isEmpty } from "@/utils";
+import { listUserDocs } from "@/utils/api";
 
 const samplePrompts = [
   "Do you have an idea of the size of a bag of rice?",
@@ -30,9 +30,8 @@ const explorer = () => {
     // Load chat History from Juno when the component mounts
     const loadResponsePair = async () => {
       setLoading(true);
-      const responsePairs = await listUserDocs("undefined");
+      const responsePairs = await listUserDocs(user?.owner || "");
       if (responsePairs && responsePairs.length > 0) {
-        console.log("response pair", responsePairs);
         setResponsePair(responsePairs);
       }
       setLoading(false);
@@ -85,15 +84,19 @@ const explorer = () => {
                 <textarea
                   className="absolute inset-0 w-full overflow-y-hidden border-none focus:outline-none text-[#4C505F] h-[4.5rem] resize-none h-[initial]"
                   placeholder="Ask me anything..."
-                  onChange={(e) => setBodyText(e.target.value)}
+                  onChange={(e) => {
+                    setBodyText(e.target.value);
+                    setValue(e.target.value);
+                  }}
                 />
               </div>
             </div>
 
             <div className="flex justify-end">
               <MessageButton
-                onClick={async () => {
-                  alert("yeah");
+                onClick={() => {
+                  setBodyText("");
+                  askQuestion();
                 }}
               />
             </div>
