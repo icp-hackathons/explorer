@@ -1,7 +1,10 @@
+import { useGlobalContext } from "@/contexts/authContext";
 import { insertPromptResponse } from "@/utils/api";
 import { useEffect, useState } from "react";
 
 export const useChatHook = (initialHistory: any) => {
+  const { user } = useGlobalContext();
+
   const [tempPairs, setTempPairs] = useState<any>([]);
   const [value, setValue] = useState("");
   const [response, setResponse] = useState(null);
@@ -44,8 +47,7 @@ export const useChatHook = (initialHistory: any) => {
     question: string,
     response: string
   ) => {
-    // //replace undefined with actual user's id
-    TODO: await insertPromptResponse("undefined", question, response);
+    await insertPromptResponse(user?.owner || "", question, response);
   };
 
   useEffect(() => {
