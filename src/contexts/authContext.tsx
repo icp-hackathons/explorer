@@ -66,7 +66,7 @@ const GlobalProvider = ({ children }: any) => {
   //Unscribe from Authlistner
   useEffect(() => {
     const cancelAuthListener = authSubscribe((user: User | null) => {
-      console.log("User:", user);
+
       if (user) {
         setUserCookie(user);
         console.log(user);

@@ -14,7 +14,7 @@ export async function callVectorDBQAChain(
   };
 
   try {
-    const url = "http://localhost:3000/api/vector-search";
+    const url = process.env.NEXT_PUBLIC_VECTOR_SEARCH_URL as string;
     const vectorSearchResponse = await fetch(url, {
       method: "POST",
       headers: {

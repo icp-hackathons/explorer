@@ -18,7 +18,7 @@ export default async function handler(
   const messages = req.body.messages;
 
   if (!query) {
-    return res.status(500).json({ message: "promt format error" });
+    return res.status(500).json({ message: "prompt format error" });
   }
 
   if (!messages || !Array.isArray(messages)) {
@@ -33,6 +33,8 @@ export default async function handler(
     "c",
     messages
   );
+
+
 
   res.status(200).json({ message: response });
 }

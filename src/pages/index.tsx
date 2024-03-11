@@ -85,8 +85,7 @@ export default function Home() {
               />
             </div>
             <p className="max-w-[38ch] text-center font-bellota text-2xl font-bold text-[#194237]">
-              Click any of the cards above to let the feast explorer, plan your
-              menus, list condiments, create meal plans, and manage your budget
+              Click on any of the cards
             </p>
           </div>
         </div>

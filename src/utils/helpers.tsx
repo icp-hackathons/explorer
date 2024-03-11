@@ -65,3 +65,13 @@ Onion,Bag,100 kg,170 g,125 g
 Chicken Maggi,Packet,400 g,,4 g
 Benny Flavor,Packet,714 g,,17 g
 `;
+
+
+export const removePrefix = (response: any) => {
+  const index = response.indexOf(':');
+  if (index !== -1) {
+    return response.substring(index + 1).trim();
+  } else {
+    return response.trim();
+  }
+}

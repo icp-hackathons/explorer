@@ -1,5 +1,7 @@
 import { useGlobalContext } from "@/contexts/authContext";
 import { insertPromptResponse } from "@/utils/api";
+import { removePrefix } from "@/utils/helpers";
+import { initJuno } from "@junobuild/core-peer";
 import { useEffect, useState } from "react";
 
 export const useChatHook = (initialHistory: any) => {
@@ -9,6 +11,18 @@ export const useChatHook = (initialHistory: any) => {
   const [value, setValue] = useState("");
   const [response, setResponse] = useState(null);
   const [responding, setResponding] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await initJuno({
+          satelliteId: "k2y4c-mqaaa-aaaal-adyqq-cai",
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     console.log("Preloading history:", initialHistory);
@@ -35,10 +49,10 @@ export const useChatHook = (initialHistory: any) => {
     const data = await response.json();
 
     if (data && data.message) {
-      const msg = data.message.startsWith("AI: ")
-        ? data.message.substring(4).trim()
-        : data.message.substring(4).trim();
-      setResponse(msg);
+      // const msg = data.message.startsWith("AI: ")
+      //   ? data.message.substring(4).trim()
+      //   : data.message.substring(4).trim();
+      setResponse(removePrefix(data.message));
     }
   };
 

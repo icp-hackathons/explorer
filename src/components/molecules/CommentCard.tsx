@@ -1,10 +1,12 @@
 import { cn } from "@/utils";
+import { BiHourglass } from "react-icons/bi";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+
 const CommentCard = (chat: {
   name: string;
-  message: string;
+  message: string | undefined;
   isUser?: boolean;
   time?: string;
 }) => {
@@ -18,9 +20,14 @@ const CommentCard = (chat: {
       <p className=" text-xl font-outfit font-semibold text-[#484E62]">
         {chat.name}
       </p>
-      <Markdown className="prose" remarkPlugins={[remarkGfm]}>
-        {chat.message}
-      </Markdown>
+      {!chat.message ?
+        <BiHourglass /> :
+        chat.isUser ? chat.message :
+          <Markdown className="prose" remarkPlugins={[remarkGfm]}>
+            {chat.message}
+          </Markdown>
+      }
+
       {chat.time && (
         <p className=" text-[#4C505F] text-sm italic text-end">{chat.time}</p>
       )}
