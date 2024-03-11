@@ -64,7 +64,7 @@ export default function Home() {
               />
 
               <Link href={"/explorer"}>
-                <div className="z-10">
+                <div className="z-10 relative">
                   <div
                     className={"min-h-96 bg-green-500"}
                     style={{
