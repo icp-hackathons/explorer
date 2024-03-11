@@ -1,5 +1,6 @@
-import { LogoCrown } from "@/utils/logoCrown";
+import { cn } from "@/utils";
 import Head from "next/head";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const isWindow = typeof window !== "undefined";
@@ -28,10 +29,10 @@ export default function Home() {
     }
   }, []);
 
-  const cardWidth = 36,
-    centerCardWidth = 44,
-    stackThreshold = 1024,
-    peekWidth = 10;
+  const sideCardWidth = 64;
+  const centerCardWidth = 72;
+  const stackThreshold = 1024;
+  const peekWidth = 10;
 
   const { width: screenWidth } = windowDimensions;
   const isMobile = screenWidth <= stackThreshold;
@@ -46,32 +47,47 @@ export default function Home() {
       </Head>
       <main>
         <div>
-          <div>
-            <LogoCrown />
-            <div className="flex justify-center items-center w-full max-w-4xl mx-auto relative">
+          <div className="flex flex-col items-center gap-16 p-8">
+            <img
+              width={200}
+              height={200}
+              src="/logo.svg"
+              alt="highfeast logo"
+            />
+            <div className="flex justify-center items-center w-full max-w-5xl mx-auto relative">
               <SideCard
-                cardWidth={cardWidth}
+                sideCardWidth={sideCardWidth}
                 centerCardWidth={centerCardWidth}
                 peekWidth={peekWidth}
                 isMobile={isMobile}
                 position="left"
-                bgColor="bg-yellow-400"
               />
 
-              <div className="z-10">
-                <div className={`w-${centerCardWidth} h-44 bg-green-500`}></div>
-              </div>
+              <Link href={"/explorer"}>
+                <div className="z-10">
+                  <div
+                    className={cn(
+                      `min-w-${centerCardWidth}`,
+                      "min-h-96 bg-green-500"
+                    )}
+                  >
+                    {/* TODO: image goes here */}
+                  </div>
+                </div>
+              </Link>
 
               <SideCard
-                cardWidth={cardWidth}
+                sideCardWidth={sideCardWidth}
                 centerCardWidth={centerCardWidth}
                 peekWidth={peekWidth}
                 isMobile={isMobile}
                 position="right"
-                bgColor="bg-red-500"
               />
             </div>
-            <p>Your food companion for every occasion...</p>
+            <p className="max-w-[38ch] text-center font-bellota text-2xl font-bold text-[#194237]">
+              Click any of the cards above to let the feast explorer, plan your
+              menus, list condiments, create meal plans, and manage your budget
+            </p>
           </div>
         </div>
       </main>
@@ -80,35 +96,44 @@ export default function Home() {
 }
 
 const SideCard = ({
-  cardWidth,
+  sideCardWidth,
   centerCardWidth,
   peekWidth,
   isMobile,
   position,
-  bgColor,
 }: {
-  cardWidth: number;
+  sideCardWidth: number;
   centerCardWidth: number;
   peekWidth: number;
   isMobile: boolean;
   position: "left" | "right";
-  bgColor: string;
 }) => {
   const leftTranslation = isMobile
     ? `translate-x-${centerCardWidth / 2 - peekWidth}`
-    : `-translate-x-${centerCardWidth / 2 + cardWidth / 2}`;
+    : `-translate-x-${centerCardWidth / 2 + sideCardWidth / 2}`;
 
   const rightTranslation = isMobile
     ? `-translate-x-${centerCardWidth / 2 - peekWidth}`
-    : `translate-x-${centerCardWidth / 2 + cardWidth / 2}`;
+    : `translate-x-${centerCardWidth / 2 + sideCardWidth / 2}`;
 
   const translation = position === "left" ? leftTranslation : rightTranslation;
 
   return (
-    <div
-      className={`absolute ${
-        position === "left" ? "left-0" : "right-0"
-      } top-0 bottom-0 w-${cardWidth} ${bgColor} transform transition duration-500 ease-in-out ${translation}`}
-    ></div>
+    <Link href={"/explorer"}>
+      <div
+        className={cn(
+          "flex items-center absolute top-0 bottom-0 transform transition duration-500 ease-in-out",
+          position === "left" ? "left-0" : "right-0",
+          translation
+        )}
+        style={{
+          minWidth: sideCardWidth / 4 + "rem",
+        }}
+      >
+        <div className="h-[90%] bg-black w-full">
+          {/* TODO: image goes here */}
+        </div>
+      </div>
+    </Link>
   );
 };
